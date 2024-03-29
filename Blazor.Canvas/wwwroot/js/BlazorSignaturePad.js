@@ -584,13 +584,11 @@ window.BlazorSignaturePad = function (id) {
 }
 window.BlazorUndoButton = function (id) {
     var canvas = this.document.getElementById(id);
-    canvas.addEventListener("click", () => {
-        const data = canvas.toData();
-        if (data) {
-            data.pop(); // remove the last dot or line
-            signaturePad.fromData(data);
-        }
-    });
+    const data = canvas.toData();
+    if (data) {
+        data.pop(); // remove the last dot or line
+        canvas.fromData(data);
+    }
 }
 //const changeBackgroundColorButton = wrapper.querySelector("[data-action=change-background-color]");
 //const changeColorButton = wrapper.querySelector("[data-action=change-color]");

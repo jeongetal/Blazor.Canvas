@@ -1,0 +1,47 @@
+﻿@page "/SignaturePad"
+@inject IJSRuntime JS
+
+<div>
+    <canvas width="300" height="200" id="theCanvas"
+        style="border: 1px solid red;"
+    ></canvas>
+</div>
+<hr />
+<div>
+    <button id="theClearButton" @onclick="ClearButtonClickAsync">
+
+    </button>
+</div>
+<hr />
+@code {
+    private string ImageData { get; set; } = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+        }
+    }
+
+    private string ImageDataSrc = string.Empty;
+    public void GetData()
+    {
+        ImageDataSrc = SignaturePad.GetDataAsync();
+    }
+    private static string GetDataAsync()
+    {
+        return ImageDataJS;
+    }
+    private static string ImageDataJS = string.Empty;
+    [JSInvokable]
+    public static void GetImageDataAsync(string imageData)
+    {
+        ImageDataJS = imageData;
+    }
+    private async void ClearButtonClickAsync()
+    {
+        await JS.InvokeAsync<object>("BlazorUndoButton", "theCanvas");
+    }
+
+}

@@ -576,18 +576,20 @@
 }));
 window.BlazorSignaturePad = function (id) {
     var canvas = this.document.getElementById(id);
-    const signaturePad = new SignaturePad(canvas, {
+    signaturePad = new SignaturePad(canvas, {
         // It's Necessary to use an opaque color when saving image as JPEG;
         // this option can be omitted if only saving as PNG or SVG
         backgroundColor: 'rgb(255, 255, 255)'
     });
+    return signaturePad;
 }
-window.BlazorUndoButton = function (id) {
-    var canvas = this.document.getElementById(id);
-    const data = canvas.toData();
+
+window.BlazorUndoButton = function () {
+    //var canvas = this.document.getElementById(id);
+    const data = signaturePad.toData();
     if (data) {
         data.pop(); // remove the last dot or line
-        canvas.fromData(data);
+        signaturePad.fromData(data);
     }
 }
 //const changeBackgroundColorButton = wrapper.querySelector("[data-action=change-background-color]");

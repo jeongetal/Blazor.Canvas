@@ -8,9 +8,7 @@
 </div>
 <hr />
 <div>
-    <button id="theClearButton" @onclick="ClearButtonClickAsync">
-
-    </button>
+    <button type="button" class="button" data-action="undo" @onclick="UndoClick">Undo</button>
 </div>
 <hr />
 @code {
@@ -20,7 +18,7 @@
     {
         if(firstRender)
         {
-            await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+            object a = await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
         }
     }
 
@@ -43,5 +41,15 @@
     {
         await JS.InvokeAsync<object>("BlazorUndoButton", "theCanvas");
     }
-
+    private async void UndoClick()
+    {
+        try
+        {
+            await JS.InvokeAsync<object>("BlazorUndoButton", "theCanvas");
+        }
+        catch (Exception ex)
+        {       
+            throw;
+        }
+    }
 }

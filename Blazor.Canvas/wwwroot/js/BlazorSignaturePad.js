@@ -574,24 +574,42 @@
     return SignaturePad;
 
 }));
-window.BlazorSignaturePad = function (id) {
+
+window.jsSignaturePad;
+
+window.blSignaturePad = function (id) {
     var canvas = this.document.getElementById(id);
-    signaturePad = new SignaturePad(canvas, {
+    window.jsSignaturePad = new SignaturePad(canvas, {
         // It's Necessary to use an opaque color when saving image as JPEG;
         // this option can be omitted if only saving as PNG or SVG
         backgroundColor: 'rgb(255, 255, 255)'
     });
-    return signaturePad;
 }
 
-window.BlazorUndoButton = function (signaturePad) {
+window.blUndoButton = function () {
     //var canvas = this.document.getElementById(id);
-    const data = signaturePad.toData();
+    const data = window.jsSignaturePad.toData();
     if (data) {
         data.pop(); // remove the last dot or line
-        signaturePad.fromData(data);
+        window.jsSignaturePad.fromData(data);
     }
 }
+window.blClearButton = function () {
+    window.jsSignaturePad.clear();
+}
+window.blChangeColorButton = function () {
+    const r = Math.round(Math.random() * 255);
+    const g = Math.round(Math.random() * 255);
+    const b = Math.round(Math.random() * 255);
+    const color = "rgb(" + r + "," + g + "," + b + ")";
+    window.jsSignaturePad.penColor = color;
+}
+window.blThicknessChange = function (min, max) {
+
+    window.jsSignaturePad.minWidth = Math.min(min, max);
+    window.jsSignaturePad.maxWidth = Math.max(min, max);
+}
+
 //const changeBackgroundColorButton = wrapper.querySelector("[data-action=change-background-color]");
 //const changeColorButton = wrapper.querySelector("[data-action=change-color]");
 //const changeWidthButton = wrapper.querySelector("[data-action=change-width]");

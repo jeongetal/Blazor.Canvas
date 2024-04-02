@@ -8,17 +8,22 @@
 </div>
 <hr />
 <div>
-    <button type="button" class="button" data-action="undo" @onclick="UndoClick">Undo</button>
+    <button type="button" class="button" @onclick="UndoButtonClickAsync">Undo</button>
+    <button type="button" class="button" @onclick="ClearButtonClickAsync">Clear</button>
+    <button type="button" class="button" @onclick="ChangeColorButtonClickAsync">Change Color</button>
+    <input type="range" max="10" min="1" step="1" @bind="@minThickness" @bind:event="ThicknessChangeAsync" />
+    <input type="range" max="10" min="1" step="1" @bind="@maxThickness" @bind:event="ThicknessChangeAsync" />
 </div>
 <hr />
 @code {
     private string ImageData { get; set; } = string.Empty;
-    private object jsSignaturePad { get; set; } = new();
+    private int minThickness { get; set; } = 1;
+    private int maxThickness { get; set; } = 1;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
         {
-            jsSignaturePad = await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+            await JS.InvokeAsync<object>("blSignaturePad", "theCanvas");
         }
     }
 
@@ -39,17 +44,18 @@
     }
     private async void ClearButtonClickAsync()
     {
-        await JS.InvokeAsync<object>("BlazorUndoButton", "theCanvas");
+        await JS.InvokeAsync<object>("blClearButton");
     }
-    private async void UndoClick()
+    private async void UndoButtonClickAsync()
     {
-        try
-        {
-            await JS.InvokeAsync<object>("BlazorUndoButton", jsSignaturePad);
-        }
-        catch (Exception ex)
-        {       
-            throw;
-        }
+        await JS.InvokeAsync<object>("blUndoButton");
+    }
+    private async void ChangeColorButtonClickAsync()
+    {
+        await JS.InvokeAsync<object>("blChangeColorButton");
+    }
+    private async void ThicknessChangeAsync()
+    {
+        await JS.InvokeAsync<object>("blThicknessChange", minThickness, maxThickness);
     }
 }

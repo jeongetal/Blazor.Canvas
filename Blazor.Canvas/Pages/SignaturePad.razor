@@ -13,12 +13,12 @@
 <hr />
 @code {
     private string ImageData { get; set; } = string.Empty;
-
+    private object jsSignaturePad { get; set; } = new();
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
         {
-            object a = await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+            jsSignaturePad = await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
         }
     }
 
@@ -45,7 +45,7 @@
     {
         try
         {
-            await JS.InvokeAsync<object>("BlazorUndoButton", "theCanvas");
+            await JS.InvokeAsync<object>("BlazorUndoButton", jsSignaturePad);
         }
         catch (Exception ex)
         {       

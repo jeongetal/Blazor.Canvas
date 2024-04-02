@@ -584,7 +584,7 @@ window.BlazorSignaturePad = function (id) {
     return signaturePad;
 }
 
-window.BlazorUndoButton = function () {
+window.BlazorUndoButton = function (signaturePad) {
     //var canvas = this.document.getElementById(id);
     const data = signaturePad.toData();
     if (data) {

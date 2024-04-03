@@ -597,17 +597,16 @@ window.blUndoButton = function () {
 window.blClearButton = function () {
     window.jsSignaturePad.clear();
 }
-window.blChangeColorButton = function () {
-    const r = Math.round(Math.random() * 255);
-    const g = Math.round(Math.random() * 255);
-    const b = Math.round(Math.random() * 255);
-    const color = "rgb(" + r + "," + g + "," + b + ")";
+window.blColorChange = function (color) {
     window.jsSignaturePad.penColor = color;
 }
-window.blThicknessChange = function (min, max) {
+window.blThicknessChange = function (thickness) {
 
-    window.jsSignaturePad.minWidth = Math.min(min, max);
-    window.jsSignaturePad.maxWidth = Math.max(min, max);
+    window.jsSignaturePad.minWidth = thickness;
+    window.jsSignaturePad.maxWidth = thickness * 5;
+}
+window.blToData = function () {
+    return window.jsSignaturePad.toData();
 }
 
 //const changeBackgroundColorButton = wrapper.querySelector("[data-action=change-background-color]");

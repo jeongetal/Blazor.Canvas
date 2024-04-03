@@ -1,6 +1,6 @@
 ﻿@page "/SignaturePad"
 @inject IJSRuntime JS
-
+@using Blazor.Canvas.Model.Models
 <div>
     <canvas width="300" height="200" id="theCanvas"
         style="border: 1px solid red;"
@@ -28,24 +28,56 @@
         }
     }
 
-    private string ImageDataSrc = string.Empty;
-    public void GetData()
-    {
-        ImageDataSrc = SignaturePad.GetDataAsync();
-    }
-    private static string GetDataAsync()
-    {
-        return ImageDataJS;
-    }
-    private static string ImageDataJS = string.Empty;
-    [JSInvokable]
-    public static void GetImageDataAsync(string imageData)
-    {
-        ImageDataJS = imageData;
-    }
+    //private string ImageDataSrc = string.Empty;
+    //public void GetData()
+    //{
+    //    ImageDataSrc = SignaturePad.GetDataAsync();
+    //}
+    //private static string GetDataAsync()
+    //{
+    //    return ImageDataJS;
+    //}
+    //private static string ImageDataJS = string.Empty;
+    //[JSInvokable]
+    //public static void GetImageDataAsync(string imageData)
+    //{
+    //    ImageDataJS = imageData;
+    //}
     private async void ClearClickAsync()
     {
-        await JS.InvokeAsync<object>("blClearButton");
+        using var db = new BloggingContext();
+
+        // Note: This sample requires the database to be created before running.
+        Console.WriteLine($"Database path: {db.DbPath}.");
+
+        // Create
+        Console.WriteLine("Inserting a new blog");
+        db.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+        try{
+            db.SaveChanges();
+        }
+        catch(Exception ex)
+        {
+            string a = ex.ToString();
+        }
+
+        // Read
+        Console.WriteLine("Querying for a blog");
+        var blog = db.Blogs
+            .OrderBy(b => b.BlogId)
+            .First();
+
+        // Update
+        Console.WriteLine("Updating the blog and adding a post");
+        blog.Url = "https://devblogs.microsoft.com/dotnet";
+        blog.Posts.Add(
+            new Post { Title = "Hello World", Content = "I wrote an app using EF Core!" });
+        db.SaveChanges();
+
+        // Delete
+        Console.WriteLine("Delete the blog");
+        db.Remove(blog);
+        db.SaveChanges(); await JS.InvokeAsync<object>("blClearButton");
     }
     private async void SaveClickAsync()
     {

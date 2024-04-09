@@ -49,8 +49,19 @@
     }
     private async void SaveClickAsync()
     {
-        var a = await JS.InvokeAsync<object>("blToData");
-        this.ClearClickAsync();
+        //var a = await JS.InvokeAsync<object>("blToData");
+        //VideoRepositoryAsync videoRepositoryAsync = new("Data Source=C:\\git\\Blazor.Canvas\\Data\\notes.db;Version=3");
+        //Video b = new()
+        //{
+        //   Company="asd"
+        //   ,Id=1
+        //   ,Name="name"
+        //   ,Title="title"
+        //   ,CreatedBy="creator"
+        //   ,Url="123"
+        //};
+        //videoRepositoryAsync.AddVideoAsync(b);
+        await JS.InvokeAsync<object>("blClearButton");
     }
     private async void UndoClickAsync()
     {

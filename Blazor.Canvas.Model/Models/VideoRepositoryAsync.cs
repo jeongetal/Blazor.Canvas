@@ -1,34 +1,43 @@
-﻿using Blazor.Canvas.Model.Models;
+﻿using System.Data;
+using System.Data.SQLite;
+using Blazor.Canvas.Model.Interfaces;
 using Dapper;
-using Microsoft.Data.Sqlite;
-using System.Data;
 
-namespace VideoAppCore.Models
+namespace Blazor.Canvas.Model.Models
 {
     /// <summary>
     /// [4][2][2] 리포지토리 클래스(비동기 방식): Micro ORM인 Dapper를 사용하여 CRUD 구현
     /// </summary>
-    public class VideoRepositoryDapperAsync
+    public class VideoRepositoryAsync : IVideoRepositoryAsync
     {
-        private readonly SqliteConnection db;
+        private readonly SQLiteConnection db;
 
-        public VideoRepositoryDapperAsync(string connectionString)
+        public VideoRepositoryAsync(string connectionString)
         {
-            db = new SqliteConnection(connectionString);
+            db = new SQLiteConnection(connectionString);
         }
 
         // 입력
         public async Task<Video> AddVideoAsync(Video model)
         {
-            const string query =
-                "Insert Into Videos(Title, Url, Name, Company, CreatedBy) Values(@Title, @Url, @Name, @Company, @CreatedBy);" +
-                "Select Cast(SCOPE_IDENTITY() As Int);";
+            try
+            {
+                const string query =
+    "Insert Into Videos(Title, Url, Name, Company, CreatedBy) Values(@Title, @Url, @Name, @Company, @CreatedBy);" +
+    "Select Cast(SCOPE_IDENTITY() As Int);";
 
-            int id = await db.ExecuteScalarAsync<int>(query, model);
+                int id = await db.ExecuteScalarAsync<int>(query, model);
 
-            model.Id = id;
+                model.Id = id;
 
+                return model;
+            }
+            catch (Exception ex)
+            {
+                var error=ex.ToString();
+            }
             return model;
+
         }
 
         // 상세보기

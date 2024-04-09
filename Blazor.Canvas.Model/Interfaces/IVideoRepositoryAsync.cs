@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Blazor.Canvas.Model.Models;
 
-namespace VideoAppCore.Models
+namespace Blazor.Canvas.Model.Interfaces
 {
     /// <summary>
     /// [3][2] 인터페이스(비동기 방식): Videos 테이블에 대한 CRUD API 명세서 작성

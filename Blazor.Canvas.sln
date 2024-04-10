@@ -4,8 +4,6 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Canvas", "Blazor.Canvas\Blazor.Canvas.csproj", "{FB74E9AC-FB45-4EB7-BD83-AACF17522ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Canvas.Model", "Blazor.Canvas.Model\Blazor.Canvas.Model.csproj", "{1E37FCE5-2B35-453B-8F7B-AA88BED9A0DE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,16 +16,12 @@ Global
 		{FB74E9AC-FB45-4EB7-BD83-AACF17522ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB74E9AC-FB45-4EB7-BD83-AACF17522ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB74E9AC-FB45-4EB7-BD83-AACF17522ACD}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{1E37FCE5-2B35-453B-8F7B-AA88BED9A0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E37FCE5-2B35-453B-8F7B-AA88BED9A0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E37FCE5-2B35-453B-8F7B-AA88BED9A0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E37FCE5-2B35-453B-8F7B-AA88BED9A0DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 		SolutionGuid = {7FF04B66-59E5-4197-A4D8-1CA1BB69ECBF}
+		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 	EndGlobalSection
 EndGlobal

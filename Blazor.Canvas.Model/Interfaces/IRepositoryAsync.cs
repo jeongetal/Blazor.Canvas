@@ -7,12 +7,11 @@ namespace Blazor.Canvas.Model.Interfaces
     /// <summary>
     /// [3][2] 인터페이스(비동기 방식): Videos 테이블에 대한 CRUD API 명세서 작성
     /// </summary>
-    public interface IVideoRepositoryAsync
+    public interface IRepositoryAsync<T>
     {
-        Task<Video> AddVideoAsync(Video model);        // 입력: T Add(T model);
-        Task<List<Video>> GetVideosAsync();            // 출력: List<T> GetAll();
-        Task<Video> GetVideoByIdAsync(int id);         // 상세: GetById(int id);
-        Task<Video> UpdateVideoAsync(Video model);     // 수정: T Update, Edit(T model);
+        Task<T> AddAsync(T model);        // 입력: T Add(T model);
+        Task<List<T>> GetAsync();            // 출력: List<T> GetAll();
+        Task<T> UpdateAsync(T model);     // 수정: T Update, Edit(T model);
         Task RemoveVideoAsync(int id);                  // 삭제: void Delete, Remove(int id);
     }
 }

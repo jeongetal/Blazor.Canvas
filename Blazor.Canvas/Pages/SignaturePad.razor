@@ -28,39 +28,22 @@
         }
     }
 
-    //private string ImageDataSrc = string.Empty;
-    //public void GetData()
-    //{
-    //    ImageDataSrc = SignaturePad.GetDataAsync();
-    //}
-    //private static string GetDataAsync()
-    //{
-    //    return ImageDataJS;
-    //}
-    //private static string ImageDataJS = string.Empty;
-    //[JSInvokable]
-    //public static void GetImageDataAsync(string imageData)
-    //{
-    //    ImageDataJS = imageData;
-    //}
     private async void ClearClickAsync()
     {
         await JS.InvokeAsync<object>("blClearButton");
     }
     private async void SaveClickAsync()
     {
-        //var a = await JS.InvokeAsync<object>("blToData");
-        //VideoRepositoryAsync videoRepositoryAsync = new("Data Source=C:\\git\\Blazor.Canvas\\Data\\notes.db;Version=3");
-        //Video b = new()
-        //{
-        //   Company="asd"
-        //   ,Id=1
-        //   ,Name="name"
-        //   ,Title="title"
-        //   ,CreatedBy="creator"
-        //   ,Url="123"
-        //};
-        //videoRepositoryAsync.AddVideoAsync(b);
+        var a = await JS.InvokeAsync<object>("blToData");
+        var videoSQLiteRepositoryAsync = new NoteSQLiteRepositoryAsync();
+        Note b = new()
+            {
+                Id = (await videoSQLiteRepositoryAsync.GetMaxIdAsync()) + 1,
+                Title = "title",
+                CreatedBy = "creator",
+                Url = "123",
+            };
+        await videoSQLiteRepositoryAsync.AddAsync(b);
         await JS.InvokeAsync<object>("blClearButton");
     }
     private async void UndoClickAsync()

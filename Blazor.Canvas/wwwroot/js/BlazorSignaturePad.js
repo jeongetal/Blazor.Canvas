@@ -597,10 +597,10 @@ window.blUndoButton = function () {
 window.blClearButton = function () {
     window.jsSignaturePad.clear();
 }
-window.blColorChange = function (color) {
+window.blChangeColor = function (color) {
     window.jsSignaturePad.penColor = color;
 }
-window.blThicknessChange = function (thickness) {
+window.blChangeThickness = function (thickness) {
 
     window.jsSignaturePad.minWidth = thickness;
     window.jsSignaturePad.maxWidth = thickness * 5;
